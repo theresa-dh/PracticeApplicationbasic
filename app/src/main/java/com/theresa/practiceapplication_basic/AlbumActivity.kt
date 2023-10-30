@@ -12,9 +12,7 @@ class AlbumActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAlbumBinding
 
-    private lateinit var photos: ArrayList<Photo>
-    private lateinit var imageList: MutableList<Int>
-    private lateinit var titleList: MutableList<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +20,8 @@ class AlbumActivity : AppCompatActivity() {
         binding = ActivityAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        photos = arrayListOf<Photo>()
-
-        val recyclerView: RecyclerView = binding.albumView
-        recyclerView.adapter = AlbumAdapter(photos)
-        recyclerView.layoutManager = GridLayoutManager(this, 2)
-        recyclerView.setHasFixedSize(true)
-
-        imageList = mutableListOf(
+        var photos: ArrayList<Photo> = arrayListOf<Photo>()
+        var imageList: MutableList<Int> = mutableListOf(
             R.drawable.photo9,
             R.drawable.photo10
 //            R.drawable.photo1,
@@ -41,7 +33,7 @@ class AlbumActivity : AppCompatActivity() {
 //            R.drawable.photo7,
 //            R.drawable.photo8
         )
-        titleList = mutableListOf(
+        var titleList: MutableList<String> = mutableListOf(
             "Mount Vertigo",
             "Mount Splashmore",
             "Mount Moonlike",
@@ -52,17 +44,27 @@ class AlbumActivity : AppCompatActivity() {
             "Mount Grey",
         )
 
+        fun getPhotos(): ArrayList<Photo> {
+            for (i in imageList.indices) {
+                val photo = Photo(i, imageList[i], titleList[i])
+                photos.add(photo)
+            }
+            return photos
+        }
         getPhotos()
+
+        val albumAdapter = AlbumAdapter()
+        albumAdapter.submitList(photos)
+
+        val recyclerView: RecyclerView = binding.albumView
+        recyclerView.adapter = albumAdapter
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
+        recyclerView.setHasFixedSize(true)
     }
 
     override fun onResume() {
         super.onResume()
     }
 
-    private fun getPhotos() {
-        for (i in imageList.indices) {
-            val photo = Photo(imageList[i], titleList[i])
-            photos.add(photo)
-        }
-    }
+
 }
