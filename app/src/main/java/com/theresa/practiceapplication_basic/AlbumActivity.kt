@@ -20,8 +20,8 @@ class AlbumActivity : AppCompatActivity() {
         binding = ActivityAlbumBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var photos: ArrayList<Photo> = arrayListOf<Photo>()
-        var imageList: MutableList<Int> = mutableListOf(
+        val photos: ArrayList<Photo> = arrayListOf()
+        val imageList: MutableList<Int> = mutableListOf(
             R.drawable.photo9,
             R.drawable.photo10
 //            R.drawable.photo1,
@@ -33,7 +33,7 @@ class AlbumActivity : AppCompatActivity() {
 //            R.drawable.photo7,
 //            R.drawable.photo8
         )
-        var titleList: MutableList<String> = mutableListOf(
+        val titleList: MutableList<String> = mutableListOf(
             "Mount Vertigo",
             "Mount Splashmore",
             "Mount Moonlike",
